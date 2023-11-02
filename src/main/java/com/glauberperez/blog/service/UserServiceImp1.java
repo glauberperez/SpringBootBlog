@@ -19,4 +19,11 @@ public class UserServiceImp1 implements UserService{
         return userRepository.findAll();
     }
 
+    @Override
+    public void registerUser(UserModel user) {
+        this.userRepository.save(user);
+    }
+
+
+
 }
