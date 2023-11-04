@@ -20,10 +20,8 @@ public class UserServiceImp1 implements UserService{
     }
 
     @Override
-    public void registerUser(UserModel user) {
+    public void register(UserModel user) {
         this.userRepository.save(user);
     }
-
-
 
 }

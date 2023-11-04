@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface UserService {
     List<UserModel> getAllUsers();
-    void registerUser(UserModel user);
+    void register(UserModel user);
+
+    //autenticar usuario aqui
 }
