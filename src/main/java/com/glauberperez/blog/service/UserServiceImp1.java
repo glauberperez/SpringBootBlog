@@ -24,4 +24,11 @@ public class UserServiceImp1 implements UserService{
         this.userRepository.save(user);
     }
 
+
+    //find user
+    @Override
+    public UserModel findUser(String username) {
+        return userRepository.findByUsername(username);
+    }
+
 }

@@ -9,5 +9,7 @@ public interface UserService {
     List<UserModel> getAllUsers();
     void register(UserModel user);
 
-    //autenticar usuario aqui
+    UserModel findUser(String username);
+
+    //autenticação to-do
 }

@@ -5,9 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import com.glauberperez.blog.model.UserModel;
 
-import java.util.List;
-
 @Repository
 public interface UserRepository extends JpaRepository<UserModel, Long> {
+    public UserModel findByUsername(String username);  //Encontrar usuário pelo username;
 
 }
