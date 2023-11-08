@@ -1,6 +1,7 @@
 package com.glauberperez.blog.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -9,7 +10,7 @@ import com.glauberperez.blog.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImp1 implements UserService{
+public class UserServiceImp1 implements UserService {
 
     @Autowired
     private UserRepository userRepository;
@@ -26,9 +27,5 @@ public class UserServiceImp1 implements UserService{
 
 
     //find user
-    @Override
-    public UserModel findUser(String username) {
-        return userRepository.findByUsername(username);
-    }
 
 }

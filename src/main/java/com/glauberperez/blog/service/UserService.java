@@ -4,12 +4,11 @@ import com.glauberperez.blog.model.UserModel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
     List<UserModel> getAllUsers();
     void register(UserModel user);
-
-    UserModel findUser(String username);
 
     //autenticação to-do
 }
