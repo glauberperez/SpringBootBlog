@@ -11,17 +11,13 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                    .requestMatchers("/register").permitAll() // Rota que não requer autenticação
-                    .anyRequest().authenticated()
-                    .and()
-                .formLogin()
-                    //.loginPage("/login") quando ter o login personalizado
-                    .permitAll()
-                    .and()
-                .logout()
-                    .permitAll();
+        http.authorizeHttpRequests( auth ->
+                    auth.requestMatchers("/register").permitAll() // Rota que não requer autenticação
+                    .anyRequest().authenticated())
+                .formLogin(formLogin ->
+                        formLogin //.loginPage("/login")
+                                .permitAll())
+                .logout( logout -> logout.permitAll());
         return http.build();
     }
 }
