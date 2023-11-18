@@ -1,42 +1,50 @@
 package com.glauberperez.blog.configuration;
 
-import com.glauberperez.blog.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.web.SecurityFilterChain;
-
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    private CustomUserDetailsService userDetailsService;
+
     @Bean
-    public static PasswordEncoder passwordEncoder(){
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
+    public UserDetailsService getDetailsService() {
+        return new CustomUserDetailsService();
+    }
+
+    @Bean
+    public DaoAuthenticationProvider authProvider() {
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setUserDetailsService(getDetailsService());
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+        return daoAuthenticationProvider;
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests( auth ->
-                    auth.requestMatchers("/register").permitAll() // Rota que não requer autenticação
-                    .anyRequest().authenticated())
-                .formLogin(formLogin ->
-                        formLogin //.loginPage("/login")
-                                .permitAll()
-                                .defaultSuccessUrl("/")
-                                )
+                    auth.requestMatchers("register").permitAll().anyRequest().authenticated())
+                .formLogin( login -> login.defaultSuccessUrl("/").permitAll())
+
+                //preciso mudar a rota do ROLE_USER e do ROLE_ADMIN
+
                 .logout( logout -> logout.permitAll());
         return http.build();
     }
 
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
-        return configuration.getAuthenticationManager();
-    }
+
+
 }

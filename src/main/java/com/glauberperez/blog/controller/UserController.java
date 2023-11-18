@@ -19,7 +19,7 @@ public class UserController {
     @GetMapping("/")
     public String homePage(Model model){
         model.addAttribute("listUsers", userService.getAllUsers());
-        return "index";
+        return "feed";
     }
 
     @GetMapping("/register")
