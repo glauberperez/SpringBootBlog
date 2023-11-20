@@ -33,12 +33,9 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests( auth ->
-                    auth.requestMatchers("register").permitAll().anyRequest().authenticated())
-                .formLogin( login -> login.defaultSuccessUrl("/").permitAll())
-
-                //preciso mudar a rota do ROLE_USER e do ROLE_ADMIN
-
+        http                                                                                            // tá conflitando nesse requestmatcher, preciso criar subdiretorios para admin e user
+                .authorizeHttpRequests( auth -> auth.requestMatchers("register").permitAll().requestMatchers("/u/**").hasRole("USER").requestMatchers("/adm/**").hasRole("ADMIN").anyRequest().authenticated())
+                .formLogin( login -> login.successHandler(new RoleHandler()).permitAll())
                 .logout( logout -> logout.permitAll());
         return http.build();
     }

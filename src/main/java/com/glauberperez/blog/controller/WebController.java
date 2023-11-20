@@ -21,7 +21,7 @@ public class WebController {
     @Autowired
     private PostService postService;
 
-    @GetMapping("/")
+    @GetMapping("/u/")
     public String homePage(Model model){
         PostModel post = new PostModel();
 
@@ -32,7 +32,7 @@ public class WebController {
         return "feed";
     }
 
-    @PostMapping("/publish")
+    @PostMapping("/u/publish")
     public String publish(@ModelAttribute("post") PostModel post){
 
         postService.publish(post);
@@ -54,6 +54,14 @@ public class WebController {
     public String saveUser(@ModelAttribute("user") UserModel user){
         userService.register(user);
         return("redirect:/");
+    }
+
+
+    //admin
+
+    @GetMapping("/adm/dashboard")
+    public String admin(){
+        return "admin";
     }
 
 

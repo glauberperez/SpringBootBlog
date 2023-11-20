@@ -52,19 +52,12 @@
 
     <div class="main text-center">
 
-        <div class="post">
-            <p>username123</p>
-            <p> put a limit of ? caracteres </p>
-            <!--optional media-->
-            <div class="media">
-                <img src="https://picsum.photos/560/315" alt="..." class="img-thumbnail"> 
-
-            </div>
-        </div>
-
         <div class="post" th:each="post : ${listPost}">
             <p th:text="${post.user?.username}"></p>
             <p th:text="${post.content}"></p>
+            <div class="media">
+                <img src="https://picsum.photos/560/315" alt="..." class="img-thumbnail"> 
+            </div>
 
         </div>
 
