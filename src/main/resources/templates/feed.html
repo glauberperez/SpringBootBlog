@@ -75,10 +75,10 @@
             <div class="modal-content">
                 <div class="modal-body">
 
-                    <form th:action="@{/}" method="POST"> <!-- th:object="@{post}" -->
+                    <form th:action="@{/}" th:object="${post}" method="POST"> 
                         <div class="mb-3">
                             <label class="col-form-label">Description:</label>
-                            <textarea class="form-control" rows="5"></textarea> <!-- th:field="*{content}" -->
+                            <textarea class="form-control" th:field="*{content}" rows="5" ></textarea> <!-- th:field="*{content}" -->
                         </div>
                         <div class="mb-3">
                             <label for="post-file" class="col-form-label">Media:</label>
