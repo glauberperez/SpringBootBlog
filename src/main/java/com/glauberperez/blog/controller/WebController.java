@@ -29,7 +29,7 @@ public class WebController {
 
         model.addAttribute("listPost", postService.getAllPosts());
         
-        return "feed";
+        return "/user/feed";
     }
 
     @PostMapping("/u/publish")
@@ -61,10 +61,13 @@ public class WebController {
 
     @GetMapping("/adm/dashboard")
     public String admin(){
-        return "admin";
+        return "/admin/admin";
     }
 
 
+    //exception
 
+    @GetMapping("/403")
+    public String unauthorized() { return "/exceptions/403"; }
 
 }

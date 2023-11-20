@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -33,9 +34,11 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http                                                                                            // tá conflitando nesse requestmatcher, preciso criar subdiretorios para admin e user
+        http
                 .authorizeHttpRequests( auth -> auth.requestMatchers("register").permitAll().requestMatchers("/u/**").hasRole("USER").requestMatchers("/adm/**").hasRole("ADMIN").anyRequest().authenticated())
                 .formLogin( login -> login.successHandler(new RoleHandler()).permitAll())
+                .exceptionHandling( exception -> exception.accessDeniedPage("/403"))
+                //need to handle 404 too and other requests
                 .logout( logout -> logout.permitAll());
         return http.build();
     }
