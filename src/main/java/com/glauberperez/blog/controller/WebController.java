@@ -32,12 +32,12 @@ public class WebController {
         return "feed";
     }
 
-    @PostMapping("/")
+    @PostMapping("/publish")
     public String publish(@ModelAttribute("post") PostModel post){
 
         postService.publish(post);
 
-        return "feed";
+        return "redirect:/";
     }
 
 

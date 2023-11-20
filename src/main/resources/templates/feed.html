@@ -63,7 +63,7 @@
         </div>
 
         <div class="post" th:each="post : ${listPost}">
-            <p th:text="${post.user.username}"></p>
+            <p th:text="${post.user?.username}"></p>
             <p th:text="${post.content}"></p>
 
         </div>
@@ -75,7 +75,7 @@
             <div class="modal-content">
                 <div class="modal-body">
 
-                    <form th:action="@{/}" th:object="${post}" method="POST"> 
+                    <form th:action="@{/publish}" th:object="${post}" method="POST"> 
                         <div class="mb-3">
                             <label class="col-form-label">Description:</label>
                             <textarea class="form-control" th:field="*{content}" rows="5" ></textarea> <!-- th:field="*{content}" -->

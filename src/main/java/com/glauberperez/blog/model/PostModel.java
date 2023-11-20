@@ -20,7 +20,7 @@ public class PostModel {
     @Column(name = "content")
     private String content;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="user_id", referencedColumnName="id")
     private UserModel user;
 
