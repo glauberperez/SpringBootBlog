@@ -17,7 +17,7 @@ public class ReactionModel {
     @Column(name = "comment")
     private String comment;
 
-   @Column(name = "like")
+   @Column(name = "is_like")
    private boolean like;
 
     @OneToOne
@@ -30,16 +30,3 @@ public class ReactionModel {
 
 }
 
-/* O problema provavelmente está aqui
-   a table reactions não está sendo criada,
-   provavelmente,
-
-
-Error executing DDL "create table reactions (id bigint not null auto_increment, comment varchar(255), like bit, post_id bigint, user_id bigint, primary key (id)) engine=InnoDB" via JDBC [You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'like bit, post_id bigint, user_id bigint, primary key (id)) engine=InnoDB' at line 1]
-
-
-tipo de dados??
-bit like?
-
-
-*/
