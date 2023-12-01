@@ -1,13 +1,6 @@
 package com.glauberperez.blog.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,14 +20,26 @@ public class ReactionModel {
    @Column(name = "like")
    private boolean like;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name="user_id", referencedColumnName="id")
     private UserModel user;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name="post_id", referencedColumnName="id")
     private PostModel post;
 
-    
 }
 
+/* O problema provavelmente está aqui
+   a table reactions não está sendo criada,
+   provavelmente,
+
+
+Error executing DDL "create table reactions (id bigint not null auto_increment, comment varchar(255), like bit, post_id bigint, user_id bigint, primary key (id)) engine=InnoDB" via JDBC [You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'like bit, post_id bigint, user_id bigint, primary key (id)) engine=InnoDB' at line 1]
+
+
+tipo de dados??
+bit like?
+
+
+*/

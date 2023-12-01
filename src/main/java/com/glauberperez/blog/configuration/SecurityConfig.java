@@ -39,6 +39,9 @@ public class SecurityConfig {
                 .formLogin( login -> login.successHandler(new RoleHandler()).permitAll())
                 .exceptionHandling( exception -> exception.accessDeniedPage("/403"))
                 //need to handle 404 too and other requests
+
+
+
                 .logout( logout -> logout.permitAll());
         return http.build();
     }

@@ -7,8 +7,8 @@ import java.util.List;
 public interface ReactionService {
 
     List <ReactionModel> getAllReactions();
+    void comment(Long postId, String comment);
+    void like(Long postId, boolean like);
 
-    void changeLike(Boolean like);
-    void changeComment(String comment);
 
 }

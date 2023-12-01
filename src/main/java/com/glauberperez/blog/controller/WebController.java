@@ -1,8 +1,10 @@
 package com.glauberperez.blog.controller;
 
 import com.glauberperez.blog.model.PostModel;
+import com.glauberperez.blog.model.ReactionModel;
 import com.glauberperez.blog.model.UserModel;
 import com.glauberperez.blog.service.PostService;
+import com.glauberperez.blog.service.ReactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.glauberperez.blog.service.UserService;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -21,6 +24,9 @@ public class WebController {
     @Autowired
     private PostService postService;
 
+    @Autowired
+    private ReactionService reactionService;
+
     @GetMapping("/u/")
     public String homePage(Model model){
         PostModel post = new PostModel();
@@ -28,7 +34,8 @@ public class WebController {
         model.addAttribute("post", post);
 
         model.addAttribute("listPost", postService.getAllPosts());
-        
+
+
         return "/user/feed";
     }
 
@@ -37,9 +44,16 @@ public class WebController {
 
         postService.publish(post);
 
-        return "redirect:/";
+        return "redirect:/u/";
     }
 
+    @GetMapping("/u/{postId}/{like}")
+    public String like(@PathVariable("postId") Long postId, @PathVariable("like") boolean like){
+
+        reactionService.like(postId, like);
+
+        return "redirect:/";
+    }
 
     @GetMapping("/register")
     public String registerUser(Model model){
