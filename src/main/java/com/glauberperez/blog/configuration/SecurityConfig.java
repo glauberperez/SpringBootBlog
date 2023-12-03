@@ -36,13 +36,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests( auth -> auth.requestMatchers("register").permitAll().requestMatchers("/u/**").hasRole("USER").requestMatchers("/adm/**").hasRole("ADMIN").anyRequest().authenticated())
-                .formLogin( login -> login.successHandler(new RoleHandler()).permitAll())
+                .formLogin( login -> login.loginPage("/login").successHandler(new RoleHandler()).permitAll())
                 .exceptionHandling( exception -> exception.accessDeniedPage("/403"))
                 //need to handle 404 too and other requests
 
-
-
-                .logout( logout -> logout.permitAll());
+                .logout( logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/login?logout").permitAll());
         return http.build();
     }
 

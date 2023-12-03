@@ -27,6 +27,11 @@ public class WebController {
     @Autowired
     private ReactionService reactionService;
 
+    @GetMapping("/login")
+    String login() {
+        return "login";
+    }
+
     @GetMapping("/u/")
     public String homePage(Model model){
         PostModel post = new PostModel();
