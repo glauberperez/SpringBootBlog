@@ -101,6 +101,13 @@ public class WebController {
         return "/admin/admin_pages/dashboard";
     }
 
+    @GetMapping("/adm/users/")
+    public String users(Model model){
+        model.addAttribute("users", userAdminService.getAllUsers());
+
+        return "/admin/admin_pages/users";
+    }
+
 
     //exception
 
