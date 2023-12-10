@@ -98,7 +98,7 @@ public class WebController {
         model.addAttribute("countUsers", userAdminService.countUsers());
         model.addAttribute("countPosts", postService.countPosts());
 
-        return "/admin/dashboard";
+        return "/admin/admin_pages/dashboard";
     }
 
 
