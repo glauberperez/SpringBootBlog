@@ -8,4 +8,5 @@ public interface UserAdminService {
 
     List<UserModel> getAllUsers();
     UserModel getUserById(Long id);
+    int countUsers();
 }

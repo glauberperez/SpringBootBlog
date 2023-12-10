@@ -22,4 +22,9 @@ public class UserAdminServiceImpl implements UserAdminService {
     public UserModel getUserById(Long id) {
         return userRepository.findById(id).get();
     }
+
+    @Override
+    public int countUsers() {
+        return userRepository.countUsers();
+    }
 }

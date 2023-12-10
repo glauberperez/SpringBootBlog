@@ -7,4 +7,5 @@ public interface PostService {
 
     List<PostModel> getAllPosts();
     void publish(PostModel post);
+    int countPosts();
 }

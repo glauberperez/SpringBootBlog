@@ -3,17 +3,17 @@ package com.glauberperez.blog.controller;
 import com.glauberperez.blog.model.PostModel;
 import com.glauberperez.blog.model.ReactionModel;
 import com.glauberperez.blog.model.UserModel;
-import com.glauberperez.blog.service.PostService;
-import com.glauberperez.blog.service.ReactionService;
+import com.glauberperez.blog.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.glauberperez.blog.service.UserService;
-
 @Controller
 public class WebController {
+
+    @Autowired
+    private UserAdminService userAdminService;
 
     @Autowired
     private UserService userService;
@@ -91,6 +91,14 @@ public class WebController {
 
 
         return "/admin/feed";
+    }
+
+    @GetMapping("/adm/dashboard/")
+    public String dashboard(Model model){
+        model.addAttribute("countUsers", userAdminService.countUsers());
+        model.addAttribute("countPosts", postService.countPosts());
+
+        return "/admin/dashboard";
     }
 
 

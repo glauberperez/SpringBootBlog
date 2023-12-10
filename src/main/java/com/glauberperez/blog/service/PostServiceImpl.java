@@ -36,4 +36,9 @@ public class PostServiceImpl implements PostService{
 
         this.postRepository.save(post);
     }
+
+    @Override
+    public int countPosts() {
+        return postRepository.countPosts();
+    }
 }
