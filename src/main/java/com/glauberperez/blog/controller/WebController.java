@@ -81,9 +81,16 @@ public class WebController {
 
     //admin
 
-    @GetMapping("/adm/dashboard")
-    public String admin(){
-        return "/admin/admin";
+    @GetMapping("/adm/")
+    public String admin(Model model){
+        PostModel post = new PostModel();
+
+        model.addAttribute("post", post);
+
+        model.addAttribute("listPost", postService.getAllPosts());
+
+
+        return "/admin/feed";
     }
 
 

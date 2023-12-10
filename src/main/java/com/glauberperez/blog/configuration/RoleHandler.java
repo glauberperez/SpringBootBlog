@@ -17,7 +17,7 @@ public class RoleHandler extends SimpleUrlAuthenticationSuccessHandler {
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
 
         if (roles.contains("ROLE_ADMIN")) {
-            getRedirectStrategy().sendRedirect(request, response, "/adm/dashboard");
+            getRedirectStrategy().sendRedirect(request, response, "/adm/");
         } else if (roles.contains("ROLE_USER")) {
             getRedirectStrategy().sendRedirect(request, response, "/u/");
         } else {
