@@ -4,8 +4,8 @@ import com.glauberperez.blog.model.UserModel;
 
 import java.util.List;
 
-public interface UserService {
-    void register(UserModel user);
+public interface UserAdminService {
 
-    //autenticação to-do
+    List<UserModel> getAllUsers();
+    UserModel getUserById(Long id);
 }

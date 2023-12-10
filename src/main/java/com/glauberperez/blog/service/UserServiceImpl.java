@@ -20,10 +20,6 @@ public class UserServiceImpl implements UserService {
         return new BCryptPasswordEncoder();
     }
 
-    @Override
-    public List<UserModel> getAllUsers() {
-        return userRepository.findAll();
-    }
 
     @Override
     public void register(UserModel user) {

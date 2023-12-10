@@ -1,0 +1,10 @@
+a dashboard vai possuir as seguintes abas:
+
+home: vai conter os graficos (google charts) de posts, usuarios, comentarios, etc.
+users: usuarios
+posts: posts, comentarios e reações 
+
+
+optional:
+
+remover feed padrão e adicionar a função publish no sidebar da dashboard;
